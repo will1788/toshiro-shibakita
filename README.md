@@ -2,7 +2,7 @@
 
 ##   Créditos
 
-Este projeto foi originalmente concebido por Denilson Bonatti, Instrutor da Digital Innovation One. A presente versão expande e adapta o trabalho original para uma utilização genérica e mais flexível, focada no entendimento prático de microsserviços com Docker.
+Este projeto foi originalmente concebido por Denilson Bonatti, Instrutor da DIO. A presente versão expande e adapta o trabalho original para uma utilização genérica e mais flexível, focada no entendimento prático de microsserviços com Docker.
 
 ##   Introdução
 
