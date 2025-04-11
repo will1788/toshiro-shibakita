@@ -1,8 +1,8 @@
 CREATE TABLE dados (
-    AlunoID int,
-    Nome varchar(50),
-    Sobrenome varchar(50),
-    Endereco varchar(150),
-    Cidade varchar(50),
-    Host varchar(50)
+    CaixaID int AUTO_INCREMENT PRIMARY KEY,
+    NomeCaixa varchar(50),         -- Nome do caixa (identificador)
+    Operador varchar(50),   -- Nome do operador responsável pelo caixa
+    Localizacao varchar(150), -- Endereço ou identificação da localização do caixa na loja
+    Setor varchar(50),         -- Seção ou corredor onde o caixa está localizado
+    Host varchar(50)       -- Número ou identificador do terminal do caixa
 );

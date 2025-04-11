@@ -1,48 +1,50 @@
 <html>
 
-<head>
-<title>Exemplo PHP</title>
-</head>
-<body>
+  <head>
+    <title>Exemplo PHP</title>
+  </head>
 
-<?php
-ini_set("display_errors", 1);
-header('Content-Type: text/html; charset=iso-8859-1');
+  <body>
 
-
-
-echo 'Versao Atual do PHP: ' . phpversion() . '<br>';
-
-$servername = "54.234.153.24";
-$username = "root";
-$password = "Senha123";
-$database = "meubanco";
-
-// Criar conexão
+    <?php
+      ini_set("display_errors", 1);
+      header('Content-Type: text/html; charset=iso-8859-1');
 
 
-$link = new mysqli($servername, $username, $password, $database);
 
-/* check connection */
-if (mysqli_connect_errno()) {
-    printf("Connect failed: %s\n", mysqli_connect_error());
-    exit();
-}
+      echo 'Versao Atual do PHP: ' . phpversion() . '<br>';
 
-$valor_rand1 =  rand(1, 999);
-$valor_rand2 = strtoupper(substr(bin2hex(random_bytes(4)), 1));
-$host_name = gethostname();
+      // Modificação para usar variáveis de ambiente
 
+      $servername = getenv('DB_HOST') ?: 'localhost';
+      $username = getenv('DB_USER') ?: 'root';
+      $password = getenv('DB_PASSWORD') ?: 'Senha123';
+      $database = getenv('DB_NAME') ?: 'meubanco';
 
-$query = "INSERT INTO dados (AlunoID, Nome, Sobrenome, Endereco, Cidade, Host) VALUES ('$valor_rand1' , '$valor_rand2', '$valor_rand2', '$valor_rand2', '$valor_rand2','$host_name')";
+      // Criar conexão
 
 
-if ($link->query($query) === TRUE) {
-  echo "New record created successfully";
-} else {
-  echo "Error: " . $link->error;
-}
+      $link = new mysqli($servername, $username, $password, $database);
 
-?>
-</body>
+      /* check connection */
+      if ($link->connect_error) { // Sugestão de versão mais fácil ler
+        die("Falha na conexão: " . $link->connect_error);
+      }
+
+      $valor_rand1 =  rand(1, 999);
+      $valor_rand2 = strtoupper(substr(bin2hex(random_bytes(4)), 1));
+      $host_name = gethostname();
+
+      /* Atualização dos nomes segundo as informações alteradas no banco.sql */
+      $query = "INSERT INTO dados (CaixaID, NomeCaixa, Operador, Localizacao, Setor, Host) VALUES ('$valor_rand1' , '$valor_rand2', '$valor_rand2', '$valor_rand2', '$valor_rand2','$host_name')";
+
+
+      if ($link->query($query) === TRUE) {
+        echo "New record created successfully";
+      } else {
+        echo "Error: " . $link->error;
+      }
+
+    ?>
+  </body>
 </html>
